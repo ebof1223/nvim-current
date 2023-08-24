@@ -11,8 +11,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<C-b>", ":wincmd w<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -186,17 +184,23 @@ require('lazy').setup({
     },
     config = function()
       require("nvim-tree").setup {}
+      vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap("n", "<C-b>", ":wincmd w<CR>", { noremap = true, silent = true })
     end,
   },
+
+  "folke/trouble.nvim",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+  },
+
   {
     "zbirenbaum/copilot.lua",
-    version = "*",
-    lazy = false,
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-      require("copilot").setup({})
-    end,
+    suggestion = { enabled = false },
+    panel = { enabled = false },
   }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -320,7 +324,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'prisma' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -336,6 +340,7 @@ require('nvim-treesitter.configs').setup {
       node_decremental = '<M-space>',
     },
   },
+
   textobjects = {
     select = {
       enable = true,
@@ -488,6 +493,7 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
+
 
 cmp.setup {
   snippet = {
