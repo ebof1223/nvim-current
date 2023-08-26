@@ -3,6 +3,11 @@ vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true })
 vim.api.nvim_set_keymap("v", "<C-c>", '"+y', { noremap = true, silent = true })
 
 vim.wo.relativenumber = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -196,11 +201,42 @@ require('lazy').setup({
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
   },
-
   {
     "zbirenbaum/copilot.lua",
-    suggestion = { enabled = false },
-    panel = { enabled = false },
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = false,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<CR>",
+            refresh = "gr",
+            open = "<M-CR>"
+          },
+          layout = {
+            position = "bottom", -- | top | left | right
+            ratio = 0.4
+          },
+        },
+        suggestion = {
+          enabled = true,
+          auto_trigger = true,
+          debounce = 75,
+          keymap = {
+            accept = "<C-y>",
+            accept_word = false,
+            accept_line = false,
+            next = "<C-n]>",
+            prev = "<C-p>",
+            dismiss = "<C-]>",
+          },
+        }
+      })
+    end,
   }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
