@@ -7,6 +7,7 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+vim.opt.colorcolumn = "80"
 
 
 -- Set <space> as the leader key
@@ -230,10 +231,6 @@ require('lazy').setup({
         }
       })
     end,
-    {
-      "aserowy/tmux.nvim",
-      config = function() return require("tmux").setup() end
-    }
   }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
