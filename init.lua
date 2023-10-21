@@ -1,4 +1,4 @@
---reach-my custom mappings --
+--reach-my custom mappengs --
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true })
 
 vim.opt.clipboard = "unnamedplus"
@@ -202,7 +202,7 @@ require('lazy').setup({
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-telescope/telescope.nvim",
-      "nvim-lua/plenary.nvim",   -- required by telescope
+      "nvim-lua/plenary.nvim", -- required by telescope
       "MunifTanjim/nui.nvim",
 
       -- optional
@@ -211,9 +211,9 @@ require('lazy').setup({
       "rcarriga/nvim-notify",
     },
     opts = {
-          description = {
+      description = {
         width = "40%", ---@type string | integer
-    },
+      },
       -- configuration goes here
     },
   },
@@ -248,16 +248,18 @@ require('lazy').setup({
     end,
   },
 
-{
+  {
     'glacambre/firenvim',
 
     -- Lazy load firenvim
     -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
+    --
     lazy = not vim.g.started_by_firenvim,
     build = function()
-        vim.fn["firenvim#install"](0)
+      vim.fn["firenvim#install"](0)
+      vim.g.firenvim_config.localSettings['.*'] = { takeover = 'never' }
     end
-},
+  },
 
   {
     "zbirenbaum/copilot.lua",
@@ -334,7 +336,7 @@ vim.o.mouse = 'a'
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
---vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
