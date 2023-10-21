@@ -1,6 +1,9 @@
 --reach-my custom mappings --
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", { noremap = true })
 
+vim.opt.clipboard = "unnamedplus"
+
+
 vim.wo.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -26,24 +29,8 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
 
--- Normal mode yanking to system clipboard
-vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true, silent = true })
 
--- Visual mode yanking to system clipboard
-vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true, silent = true })
-
--- Yank the whole line to system clipboard in normal mode
-vim.api.nvim_set_keymap('n', '<leader>yy', '"+yy', { noremap = true, silent = true })
-
--- Paste from system clipboard in normal mode
-vim.api.nvim_set_keymap('n', '<leader>p', '"+p', { noremap = true, silent = true })
-
--- Paste from system clipboard in visual mode
-vim.api.nvim_set_keymap('v', '<leader>p', '"+p', { noremap = true, silent = true })
-
--- If you want to paste before the cursor in normal mode
-vim.api.nvim_set_keymap('n', '<leader>P', '"+P', { noremap = true, silent = true })
-
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 --
 -- Set <space> as the leader key
@@ -58,6 +45,15 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
+
+vim.api.nvim_set_keymap('n', '<leader>1', ':LcRun<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>2', ':LcConsole<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>3', ':LcSubmit<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>4', ':LcMenu<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ee", ":LcDescriptionToggle<CR>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>x", ":Copilot disable<CR>", { noremap = true, silent = true })
+
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -633,6 +629,8 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
