@@ -253,12 +253,21 @@ require('lazy').setup({
 
     -- Lazy load firenvim
     -- Explanation: https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
-    --
     lazy = not vim.g.started_by_firenvim,
     build = function()
       vim.fn["firenvim#install"](0)
-      vim.g.firenvim_config.localSettings['.*'] = { takeover = 'never' }
-    end
+    end,
+
+     config = function()
+    vim.g.firenvim_config = {
+      -- config values, like in my case:
+      localSettings = {
+        [".*"] = {
+          takeover = "never",
+        },
+      },
+    }
+  end
   },
 
   {
